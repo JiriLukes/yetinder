@@ -1,0 +1,54 @@
+{# templates/tinder.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>hodnocení</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td rowspan="7">{% if data.photo %}<img src="{{ asset(image_directory ~ data.photo) }}">{% endif %}</td>
+                <th>Jméno</th>
+                <td>{{ data.name }}</td>
+            </tr>
+            <tr>
+                <th>Popis</th>
+                <td>{{ data.description }}</td>
+            </tr>
+            <tr>
+                <th>Výška</th>
+                <td>{{ data.height }}</td>
+            </tr>
+            <tr>
+                <th>Hmotnost</th>
+                <td>{{ data.weight }}</td>
+            </tr>
+            <tr>
+                <th>Bydliště</th>
+                <td>{{ data.address }}</td>
+            </tr>
+            <tr>
+                <th>Aktuální hodnocení</th>
+                <td>{{ data.rating }}</td>
+            </tr>
+            <tr>
+                <th>Hodnoť jako ve škole</th>
+                <td class="rating">
+                    <a href="{{ path('rate', {id: data.id, r: 1}) }}">1</a>
+                    <a href="{{ path('rate', {id: data.id, r: 2}) }}">2</a>
+                    <a href="{{ path('rate', {id: data.id, r: 3}) }}">3</a>
+                    <a href="{{ path('rate', {id: data.id, r: 4}) }}">4</a>
+                    <a href="{{ path('rate', {id: data.id, r: 5}) }}">5</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+<a href="{{ path('tinder') }}">další YETI</a>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+{% endblock %}
